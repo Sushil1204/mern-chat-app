@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "set NODE_ENV=dev && nodemon backend/server.js"
   },
   "author": "Sushil Pundkar",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "create-react-app": "^5.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
