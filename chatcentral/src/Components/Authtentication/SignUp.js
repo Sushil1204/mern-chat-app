@@ -13,10 +13,10 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const SignUp = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const postDetails = (pics) => {
-    setPicLoading(true);
+    setLoading(true);
     if (pics === undefined) {
       toast({
         title: "Please Select Image!",
@@ -41,11 +41,11 @@ const SignUp = () => {
         .then((data) => {
           setPic(data.url.toString());
           console.log(data.url.toString());
-          setPicLoading(false);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
-          setPicLoading(false);
+          setLoading(false);
         });
     } else {
       toast({
@@ -55,13 +55,13 @@ const SignUp = () => {
         isClosable: true,
         position: "bottom-right",
       });
-      setPicLoading(false);
+      setLoading(false);
       return;
     }
   };
   let navigate = useHistory();
   const submitHandler = async () => { 
-    setPicLoading(true);
+    setLoading(true);
     if (!name || !email || !comfirmpassword || !password) {
       toast({
         title: "Please Fill all the Fields!",
@@ -70,7 +70,7 @@ const SignUp = () => {
         isClosable: true,
         position: "bottom-right",
       });
-      setPicLoading(false);
+      setLoading(false);
       return;
     }
       if (password !== comfirmpassword) {
@@ -81,7 +81,7 @@ const SignUp = () => {
           isClosable: true,
           position: "bottom-right",
         });
-        setPicLoading(false);
+        setLoading(false);
         return;
       }
     
@@ -104,7 +104,7 @@ const SignUp = () => {
       });
       
       localStorage.setItem('userInfo', JSON.stringify(data));
-      setPicLoading(false);
+      setLoading(false);
       navigate.push("/chat");
     } catch (error) {
       toast({
@@ -114,7 +114,7 @@ const SignUp = () => {
         isClosable: true,
         position: "bottom-right",
       });
-      setPicLoading(false);
+      setLoading(false);
 
     }
   };
@@ -125,7 +125,7 @@ const SignUp = () => {
   const [comfirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
   const [pic, setPic] = useState();
-  const [picLoading, setPicLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   return (
     <VStack spacing="5px">
@@ -184,7 +184,7 @@ const SignUp = () => {
         />
       </FormControl>
       <Button colorScheme="teal" width="100%" style={{marginTop:20}} onClick={submitHandler} 
-        isLoading={picLoading} variant="solid">
+        isLoading={loading} variant="solid">
         Sign Up
       </Button>
     </VStack>
