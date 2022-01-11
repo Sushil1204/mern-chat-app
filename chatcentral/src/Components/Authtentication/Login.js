@@ -6,15 +6,67 @@ import {
   InputGroup,
   InputRightElement,
   VStack,
+  useToast
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom"
 
 const Login = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const toast = useToast()
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const submitHandler = () => {};
+  const [loading, setLoading] = useState();
+
+  let navigate = useHistory();
+  
+  const submitHandler = async () => {
+    setLoading(true);
+    if (!email || !password) {
+      toast({
+        title: "Please Enter Email and Password!",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+      setLoading(false);
+      return;
+    }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post("/api/user/login",
+        { email, password },
+        config
+      );
+      toast({
+        title: "Login Successful!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+      
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      setLoading(false);
+      navigate.push("/chat");
+    } catch (error) {
+      toast({
+        title: "Error!",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+      setLoading(false);
+    };
+  }
 
   return (
     <VStack spacing="5px">
@@ -22,6 +74,7 @@ const Login = () => {
         <FormLabel>Email</FormLabel>
         <Input
           type={"email"}
+          value={email}
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -31,6 +84,7 @@ const Login = () => {
         <InputGroup>
           <Input
             type={show ? "text" : "password"}
+            value={password}
             placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -46,6 +100,7 @@ const Login = () => {
         width="100%"
         style={{ marginTop: 20 }}
         onClick={submitHandler}
+        isLoading={loading}
         variant="solid"
       >
         Login
