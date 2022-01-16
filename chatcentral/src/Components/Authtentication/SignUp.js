@@ -59,7 +59,7 @@ const SignUp = () => {
       return;
     }
   };
-  let navigate = useHistory();
+  let history = useHistory();
   const submitHandler = async () => { 
     setLoading(true);
     if (!name || !email || !comfirmpassword || !password) {
@@ -105,7 +105,7 @@ const SignUp = () => {
       
       localStorage.setItem('userInfo', JSON.stringify(data));
       setLoading(false);
-      navigate.push("/chat");
+      history.push("/chat");
     } catch (error) {
       toast({
         title: "Error!",

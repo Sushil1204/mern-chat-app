@@ -20,7 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState();
 
-  let navigate = useHistory();
+  let  history = useHistory();
   
   const submitHandler = async () => {
     setLoading(true);
@@ -55,7 +55,7 @@ const Login = () => {
       
       localStorage.setItem('userInfo', JSON.stringify(data));
       setLoading(false);
-      navigate.push("/chat");
+      history.push("/chat");
     } catch (error) {
       toast({
         title: "Error!",
