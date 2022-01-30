@@ -27,7 +27,7 @@ const ProfileModel = ({ user, children }) => {
 
       <Modal size="lg" isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent h="420px">
           <ModalHeader fontSize={"40px"} fontFamily={"work sans"} d="flex" justifyContent={"center"}>{ user.name }</ModalHeader>
           <ModalCloseButton />
           <ModalBody d="flex" flexDir="column" alignItems="center" justifyContent="speace-between"><Image borderRadius="full" boxSize="150px" src={user.pic} alt={user.name} /> <Text fontSize={{ base: "28px", md: "30px" }} fontFamily="work  sans">Email:{user.email}</Text></ModalBody>
