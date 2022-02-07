@@ -24,7 +24,7 @@ import {
 import UserBadgeItem from "../UserList/UserBadgeItem";
 import UserListItem from "../UserList/UserListItem";
 
-const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain }) => {
+const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
     const [groupChatName, setGroupChatName] = useState();
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [search, setSearch] = useState("");
@@ -65,7 +65,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain }) => {
   
         user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
         setFetchAgain(!fetchAgain);
-        // fetchMessages();
+        fetchMessages();
         setLoading(false);
       } catch (error) {
         toast({
