@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const res = require("express/lib/response");
-const { generatePath } = require("react-router-dom/cjs/react-router-dom.min");
 const generateToken = require("../config/generateToken");
 const User = require("../models/userModel");
 
